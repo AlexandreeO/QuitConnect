@@ -2,7 +2,18 @@
 <h1>home page</h1>
 
 {% if user.is_authenticated %}
-<h5>show groups you're in</h5>
+{% for group in groups %}
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">{{ group.name }}</span>
+            <p>Description: {{ group.description }}</p>
+        </div>
+    </div>
+</a>
+{% endfor %} 
+
+<h5>EITHER Show groups you're in</h5>
+<h5>OR You're not yet part of any groups, click here to explore all groups</h5>
 {% else %}
-<p>You're not yet part of any groups, click here to explore all groups</p>
+<p>Show User Name</p>
 {% endif %} {% endblock %}

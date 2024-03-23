@@ -1,0 +1,8 @@
+{% extends 'base.html' %} {% block content %}
+<h1>home page</h1>
+
+{% if user.is_authenticated %}
+<h5>show groups you're in</h5>
+{% else %}
+<p>You're not yet part of any groups, click here to explore all groups</p>
+{% endif %} {% endblock %}

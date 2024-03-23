@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-=fxip)3s@43!p^jgps2(9mfqar==yo5%_qhm0^h*ehnli-xyx4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["quitconnect.onrender.com"]
+ALLOWED_HOSTS = ['quitconnect.onrender.com', 'localhost']
 
 
 # Application definition
@@ -116,7 +116,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'static/' 
+
+LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_REDIRECT_URL = '/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

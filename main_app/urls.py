@@ -8,5 +8,7 @@ urlpatterns = [
     path('accounts/signup/', views.signup, name='signup'),
     path('groups/<int:group_id>/join/', views.join_group, name='join_group'),
     path('groups/<int:group_id>/', views.group_detail, name='group_detail'),
+    path('groups/<int:group_id>/createpost/', views.PostCreate.as_view(), name='post_create'),
+    path('groups/<int:pk>/delete/', views.PostDelete.as_view(), name='post_delete'),
 ]
 

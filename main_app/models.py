@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.urls import reverse
 
 
 # Create your models here.
@@ -14,11 +15,14 @@ class Group(models.Model):
 class UserPost(models.Model):
     content=models.CharField(max_length=300)
     created_at = models.DateTimeField(default=timezone.now)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, default=1)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     
     def __str__(self):
         return f'{self.content}'
+    
+    def get_absolute_url(self):
+        return reverse('group_detail', kwargs={'group_id': self.group.id})
 
 class Meeting(models.Model):
     date=models.DateField()

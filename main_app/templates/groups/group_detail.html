@@ -6,12 +6,27 @@
     </div>
     <div class="card-action">
         {% if user not in group.members.all %}
-        <form method="post" action="{% url 'join_group' group.id %}">
-            {% csrf_token %}
-            <button type="submit" class="submit-link">Join</button>
-        </form>
-        {% else %}
-        <button>create post</button>
+            <form method="post" action="{% url 'join_group' group.id %}">
+                {% csrf_token %}
+                <button type="submit" class="submit-link">Join</button>
+            </form>
+            {% else %}
+            {% if group.userpost_set.count %}
+                {% for userpost in group.userpost_set.all %}
+
+                    <p>{{ userpost.content }}</p>
+                    <p>Posted by: {{ userpost.user.username }}</p>
+                    {% if user == userpost.user %}
+                        <form action="{% url 'post_delete' userpost.id %}" method="POST">
+                            {% csrf_token %}
+                            <input class="btn" type="submit" value="Delete" />
+                        </form>
+                    {% endif %} 
+                {% endfor %} 
+            {% else %}
+            <h2>nothing to see here</h2>
+            {% endif %}
+            <a href="{% url 'post_create' group.id %}">Create Post</a>
         {% endif %}
     </div>
 </div>

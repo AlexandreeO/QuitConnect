@@ -5,6 +5,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import Group, UserPost, Meeting
+from django.views.generic.edit import CreateView
 
 def home(request):
     return render(request, 'home.html')

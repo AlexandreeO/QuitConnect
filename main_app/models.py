@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
+
 
 # Create your models here.
 class Group(models.Model):
@@ -11,7 +13,7 @@ class Group(models.Model):
 
 class UserPost(models.Model):
     content=models.CharField(max_length=300)
-
+    created_at = models.DateTimeField(default=timezone.now)
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     
@@ -21,7 +23,7 @@ class UserPost(models.Model):
 class Meeting(models.Model):
     date=models.DateField()
     time=models.TimeField()
-
+    created_at = models.DateTimeField(default=timezone.now)
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
     host = models.ForeignKey(User, on_delete=models.CASCADE, related_name='hosted_meetings')
 

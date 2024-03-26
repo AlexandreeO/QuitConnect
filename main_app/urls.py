@@ -12,3 +12,4 @@ urlpatterns = [
     path('groups/<int:pk>/delete/', views.PostDelete.as_view(), name='post_delete'),
 ]
 
+# testing

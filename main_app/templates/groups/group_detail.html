@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+{% block content %}
 <div>
     <div class="card-content">
         <span class="card-title">{{ group.name }}</span>
@@ -10,24 +11,26 @@
                 {% csrf_token %}
                 <button type="submit" class="submit-link">Join</button>
             </form>
-            {% else %}
+        {% else %}
             {% if group.userpost_set.count %}
                 {% for userpost in group.userpost_set.all %}
-
                     <p>{{ userpost.content }}</p>
                     <p>Posted by: {{ userpost.user.username }}</p>
                     {% if user == userpost.user %}
+                        <!-- If the current user is the author of the post, display options to update or delete the post -->
                         <form action="{% url 'post_delete' userpost.id %}" method="POST">
                             {% csrf_token %}
                             <input class="btn" type="submit" value="Delete" />
                         </form>
-                    {% endif %} 
-                {% endfor %} 
+                        <a href="{% url 'post_update' userpost.id %}">Update</a>
+                    {% endif %}
+                {% endfor %}
             {% else %}
-            <h2>nothing to see here</h2>
+                <h2>nothing to see here</h2>
             {% endif %}
             <a href="{% url 'post_create' group.id %}">Create Post</a>
         {% endif %}
     </div>
 </div>
 {% endblock %}
+

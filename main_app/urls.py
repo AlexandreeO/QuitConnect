@@ -10,6 +10,6 @@ urlpatterns = [
     path('groups/<int:group_id>/', views.group_detail, name='group_detail'),
     path('groups/<int:group_id>/createpost/', views.PostCreate.as_view(), name='post_create'),
     path('groups/<int:pk>/delete/', views.PostDelete.as_view(), name='post_delete'),
+    path('groupss/<int:pk>/update/', views.PostUpdate.as_view(), name='post_update'),   
 ]
 
-# testing

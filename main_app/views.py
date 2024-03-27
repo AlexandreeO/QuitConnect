@@ -6,7 +6,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import Group, UserPost, Meeting
-from django.views.generic.edit import CreateView, DeleteView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 def home(request):
     return render(request, 'home.html')
@@ -77,3 +77,11 @@ class PostDelete(DeleteView):
     def get_success_url(self):
         group_id = self.object.group.id
         return reverse_lazy('group_detail', kwargs={'group_id': group_id})
+
+class PostUpdate(UpdateView):
+  model = UserPost
+  fields = ['content'] 
+
+def get_success_url(self):
+    group_id = self.object.group.id
+    return reverse_lazy('group_detail', kwargs={'group_id': group_id})

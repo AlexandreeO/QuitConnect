@@ -3,7 +3,6 @@
 import os
 import sys
 
-
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Quit_Connect.settings')
@@ -19,4 +18,7 @@ def main():
 
 
 if __name__ == '__main__':
+    if os.environ.get('FINAL_DEPLOY', 'NO') == 'NO':
+        from dotenv import load_dotenv
+        load_dotenv()
     main()

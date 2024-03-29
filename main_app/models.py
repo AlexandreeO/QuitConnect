@@ -34,5 +34,10 @@ class Meeting(models.Model):
     attendees = models.ManyToManyField(User, related_name='meeting_attendees')
 
     
-    
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    post = models.ForeignKey(UserPost, on_delete=models.CASCADE) # ForeignKey for the Cat the Photo belongs to
+
+    def __str__(self):
+        return f"Photo for post_id: {self.post_id} @{self.url}"
 

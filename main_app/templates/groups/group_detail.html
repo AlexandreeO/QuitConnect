@@ -16,6 +16,13 @@
                 {% for userpost in group.userpost_set.all %}
                     <p>{{ userpost.content }}</p>
                     <p>Posted by: {{ userpost.user.username }}</p>
+                    <div>
+                        {% for photo in userpost.photo_set.all %}
+                        <img class="responsive-img card-panel" src="{{photo.url}}" />
+                        {% empty %}
+                        <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+                        {% endfor %}
+                      </div>
                     {% if user == userpost.user %}
                         <!-- If the current user is the author of the post, display options to update or delete the post -->
                         <form action="{% url 'post_delete' userpost.id %}" method="POST">

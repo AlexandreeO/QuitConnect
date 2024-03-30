@@ -39,5 +39,9 @@ class Photo(models.Model):
     post = models.ForeignKey(UserPost, on_delete=models.CASCADE) # ForeignKey for the Cat the Photo belongs to
 
     def __str__(self):
+<<<<<<< HEAD
         return f"Photo for post_id: {self.post.id} @{self.url}"
+=======
+        return f"Photo for post_id: {self.post_id} @{self.url}"
+>>>>>>> refs/remotes/origin/main
 

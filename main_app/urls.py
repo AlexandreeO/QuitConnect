@@ -11,6 +11,6 @@ urlpatterns = [
     path('groups/<int:group_id>/createpost/', views.PostCreate.as_view(), name='post_create'),
     path('groups/<int:pk>/delete/', views.PostDelete.as_view(), name='post_delete'),
     path('groups/<int:pk>/update/', views.PostUpdate.as_view(), name='post_update'),   
-    path('groups/<str:group_name>/posts/<int:post_id>/add_photo/', views.add_photo, name='add_photo'),
+    
 ]
 

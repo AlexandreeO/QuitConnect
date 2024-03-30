@@ -22,7 +22,7 @@
                             {% csrf_token %}
                             <input class="btn" type="submit" value="Delete" />
                         </form>
-                        <a href="{% url 'post_update' userpost.id %}">Update</a>
+                        <a class="btn" href="{% url 'post_update' userpost.id %}">Update</a>
                     {% endif %}
                 {% endfor %}
             {% else %}

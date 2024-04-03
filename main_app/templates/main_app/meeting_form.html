@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% block content %}
+{% if object %}
+<h1> Update Meeting</h1>
+{% else %}
+<h1>Create Meeting</h1>
+{% endif %}
+<!-- Leaving the action empty makes the form post to the same url used to display it -->
+<form action="" enctype="multipart/form-data" method="POST" class="card-panel">
+    <!-- Django requires the following for security purposes -->
+    {% csrf_token %}
+    <!-- Render the inputs inside of <tr>s & <td>s -->
+        {{ form.name }}
+        
+        <label for="id_date">Date:</label>
+        <input type="date" id="id_date" name="date" value="{{ form.date.value|date:'Y-m-d' }}" required>
+
+        <label for="id_start_time">Start Time:</label>
+        <input type="time" id="id_start_time" name="start_time" value="{{ form.start_time.value|time:'H:i' }}" required>
+
+        <label for="id_end_time">End Time:</label>
+        <input type="time" id="id_end_time" name="end_time" value="{{ form.end_time.value|time:'H:i' }}" required>
+    
+    <input type="submit" value="Submit!" class="btn" />
+</form>
+{% endblock %}

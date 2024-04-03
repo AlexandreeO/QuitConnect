@@ -13,7 +13,7 @@ class Group(models.Model):
         return f'{self.name} ({self.description})'
 
 class UserPost(models.Model):
-    content=models.CharField(max_length=300)
+    content=models.CharField(max_length=1000)
     created_at = models.DateTimeField(default=timezone.now)
     group = models.ForeignKey(Group, on_delete=models.CASCADE, default=1)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
@@ -25,15 +25,14 @@ class UserPost(models.Model):
         return reverse('group_detail', kwargs={'group_id': self.group.id})
 
 class Meeting(models.Model):
+    name=models.CharField(max_length=100)
     date=models.DateField()
-    time=models.TimeField()
+    start_time=models.TimeField(auto_now=False, null=True)
+    end_time=models.TimeField(auto_now=False, null=True)
     created_at = models.DateTimeField(default=timezone.now)
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
     host = models.ForeignKey(User, on_delete=models.CASCADE, related_name='hosted_meetings')
-
     attendees = models.ManyToManyField(User, related_name='meeting_attendees')
-
-    
 class Photo(models.Model):
     url = models.CharField(max_length=200)
     post = models.ForeignKey(UserPost, on_delete=models.CASCADE) # ForeignKey for the Cat the Photo belongs to

@@ -2,8 +2,15 @@
 {% block content %}
 <div>
     <div class="card-content">
-        <span class="card-title">{{ group.name }}</span>
+        <h1><span class="card-title">{{ group.name }}</span></h1>
         <p>Description: {{ group.description }}</p>
+    </div>
+    <div class="card-action">
+        <!-- meetings  -->
+        {% for meetings in group.meeting_set.all %}
+        <a href="meeting_id">"{{ meetings.name }}" </a> <p>happening at: {{ meetings.start_time }} - {{ meetings.end_time }} </p>
+        {% endfor %}
+        <a class="btn" href="{% url 'meeting_create' group.id %}">Create Meeting</a>
     </div>
     <div class="card-action">
         {% if user not in group.members.all %}

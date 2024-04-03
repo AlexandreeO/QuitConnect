@@ -17,12 +17,12 @@ def home(request):
 def group_detail(request, group_id):
     group = Group.objects.get(id=group_id)
     user = request.user
-    print(group.userpost_set.filter(user=user))
     
     
     return render(request, 'groups/group_detail.html', {
         'group': group,
         'user': user,
+        
     })
 
 
@@ -122,6 +122,28 @@ class PostUpdate(UpdateView):
 
         return super().form_valid(form)
 
-def get_success_url(self):
-    group_id = self.object.group.id
-    return reverse_lazy('group_detail', kwargs={'group_id': group_id})
+    def get_success_url(self):
+        group_id = self.object.group.id
+        return reverse_lazy('group_detail', kwargs={'group_id': group_id})
+
+class CreateMeeting(CreateView):
+    model = Meeting
+    fields = ['name', 'date', 'start_time', 'end_time']
+    
+    def get_success_url(self):
+        group_id = self.object.group.id
+        return reverse_lazy('group_detail', kwargs={'group_id': group_id})
+        
+    
+    def form_valid(self, form):
+        form.instance.host = self.request.user
+        form.instance.group_id = self.kwargs['group_id']
+        print(form.instance)
+
+        return super().form_valid(form)
+
+
+
+
+def JoinMeeting(request, meeting_id):
+    pass

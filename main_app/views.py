@@ -34,7 +34,7 @@ def groups(request):
     })
 
 
-    
+@login_required
 def join_group(request, group_id):
         group = Group.objects.get(id=group_id)
         user = request.user

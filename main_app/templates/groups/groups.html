@@ -1,13 +1,22 @@
 {% extends 'base.html' %} {% block content %}
+<div class="center">
 
-<h1>Explore Groups</h1>
+    <h1>Groups</h1>
+</div>
+
+
 
 {% for group in groups %}
-<a href="{% url 'group_detail' group.id %}">
-    <div class="card">
-        <div class="card-content">
-            <span class="card-title">{{ group.name }}</span>
-            <p>Description: {{ group.description }}</p>
+<!-- <a href="{% url 'group_detail' group.id %}"> -->
+    <div class="card hoverable">
+
+        <div class="card center white">
+            <div class="card-content">
+                <span class="card-title">{{ group.name }}</span>
+                <p>Description: {{ group.description }}</p>
+                <a href="{% url 'group_detail' group.id %}"><i class="small material-icons">person_add</i></a>
+            </div>
+
         </div>
     </div>
 </a>

@@ -1,15 +1,40 @@
 body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+  margin: -2% 2% 0% 2% !important;
   
-  main {
-    flex: 1 0 auto;
-  }
-  
-  footer.page-footer {
-    padding-top: 0;
-    text-align: right;
-  }
-  
+}
+
+footer.page-footer {
+  position: fixed;
+  bottom: 100;
+  width: 100%;
+
+}
+
+
+#group-name-description {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.col.s3 {
+margin-top: 5%;
+text-align: center;
+}
+
+.meeting-details {
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
+
+.meeting-content > h4 {
+  padding-bottom: 15px;
+}

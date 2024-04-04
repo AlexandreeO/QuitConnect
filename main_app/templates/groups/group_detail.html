@@ -1,50 +1,81 @@
-{% extends 'base.html' %} 
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <div>
-    <div class="card-content">
-        <h1><span class="card-title">{{ group.name }}</span></h1>
-        <p>Description: {{ group.description }}</p>
-    </div>
-    <div class="card-action">
-        <!-- meetings  -->
-        {% for meetings in group.meeting_set.all %}
-        <a href="meeting_id">"{{ meetings.name }}" </a> <p>happening at: {{ meetings.start_time }} - {{ meetings.end_time }} </p>
-        {% endfor %}
-        <a class="btn" href="{% url 'meeting_create' group.id %}">Create Meeting</a>
-    </div>
-    <div class="card-action">
-        {% if user not in group.members.all %}
-            <form method="post" action="{% url 'join_group' group.id %}">
-                {% csrf_token %}
-                <button type="submit" class="submit-link">Join</button>
-            </form>
-        {% else %}
-            {% if group.userpost_set.count %}
-                {% for userpost in group.userpost_set.all %}
-                <p>{{ userpost.user.username }} posted:</p>
-                <p>{{ userpost.content }}</p>
+    <div class="row">
+        <div class="col s3">
+            <div class="meeting-content">
+                
+                <h4>Meetings</h4>
+                <!-- meetings -->
+                <a class="btn blue  blue" href="{% url 'meeting_create' group.id %}"
+                    >Create Meeting
+                </a>
+                <hr>
+                {% for meetings in group.meeting_set.all %}
+                <div class="meeting-details">
+                    <a href="meeting_id"> <h6> {{ meetings.name }} </h6> </a>
+                    <p style="font-size: smaller;">
+                        happening at: {{ meetings.start_time }} - {{ meetings.end_time }}
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col s9">
+            <div class="left">
+                <div id="group-name-description">
+                    <h1>{{ group.name }}</h1>
+                    
+                    <p>Description: {{ group.description }}</p>
+                </div>
+
+                <div class="card-action">
+                    {% if user not in group.members.all %}
+                    <form
+                        method="post"
+                        action="{% url 'join_group' group.id %}"
+                    >
+                        {% csrf_token %}
+                        <button type="submit" class="submit-link">Join</button>
+                    </form>
+                    {% else %} 
+                    {% if group.userpost_set.count %} 
+                    {% for userpost in group.userpost_set.all %}
+                    <a class="btn btn-floating btn-medium waves-effect waves-light blue" href="{% url 'post_create' group.id %}"
+                    ><i class="material-icons">create</i>
+                    </a
+                    >
+                    <p>{{ userpost.user.username }} posted:</p>
+                    <p>{{ userpost.content }}</p>
                     <div>
                         {% for photo in userpost.photo_set.all %}
-                        <img class="responsive-img card-panel" src="{{photo.url}}" />
-                        {% empty %}
-                        <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+                        <img
+                            class="responsive-img card-panel"
+                            src="{{photo.url}}"
+                        />
+                        {% empty %} 
                         {% endfor %}
                     </div>
                     {% if user == userpost.user %}
-                        <!-- If the current user is the author of the post, display options to update or delete the post -->
-                        <form action="{% url 'post_delete' userpost.id %}" method="POST">
-                            {% csrf_token %}
-                            <input class="btn" type="submit" value="Delete" />
-                        </form>
-                        <a class="btn" href="{% url 'post_update' userpost.id %}">Update</a>
+                    <form
+                        action="{% url 'post_delete' userpost.id %}"
+                        method="POST"
+                    >
+                        {% csrf_token %}
+                        <input class="btn blue " type="submit" value="Delete" />
+                    </form>
+                    <a class="btn blue " href="{% url 'post_update' userpost.id %}"
+                    >Update
+                    </a>
                     {% endif %}
-                {% endfor %}
-            {% else %}
-                <h2>nothing to see here</h2>
-            {% endif %}
-            <a href="{% url 'post_create' group.id %}">Create Post</a>
-        {% endif %}
+                    {% endfor %} 
+                    {% else %}
+                    <h2>No posts yet</h2>
+                    {% endif %} 
+                    {% endif %}
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-{% endblock %}
 
+{% endblock %}

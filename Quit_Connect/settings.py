@@ -87,6 +87,7 @@ DATABASES = {
         'PORT': os.environ.get('DB_PORT'),
     }
 }
+
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 

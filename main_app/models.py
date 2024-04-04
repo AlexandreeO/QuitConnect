@@ -5,6 +5,13 @@ from django.urls import reverse
 
 
 # Create your models here.
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_picture = models.ImageField(upload_to='profile_pictures/', default='default_profile_picture.jpg')
+
+    def __str__(self):
+        return self.user.username
+    
 class Group(models.Model):
     name=models.CharField(max_length=100)
     description=models.CharField(max_length=250)

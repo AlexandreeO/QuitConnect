@@ -39,11 +39,9 @@
                     </form>
                     {% else %} 
                     {% if group.userpost_set.count %} 
-                    {% for userpost in group.userpost_set.all %}
                     <a class="btn btn-floating btn-medium waves-effect waves-light blue" href="{% url 'post_create' group.id %}"
-                    ><i class="material-icons">create</i>
-                    </a
-                    >
+                    ><i class="material-icons">create</i></a>
+                    {% for userpost in group.userpost_set.all %}
                     <p>{{ userpost.user.username }} posted:</p>
                     <p>{{ userpost.content }}</p>
                     <div>
